@@ -35,14 +35,11 @@ module.exports = {
           let content = { name: req.body.loginName };
           let token = Token.createToken(content);
           console.log(chalk.green('Token create success: ' + token));
-          data.token = token;
-          var user = new User(data);
-          user.save(data).then(() => {
-            res.status(200).send({
-              code: 0,
-              data: ({
-                token: token
-              })
+          res.status(200).send({
+            code: 0,
+            data: ({
+              token: token,
+              userId:data.id
             })
           })
         } else {
@@ -59,7 +56,7 @@ module.exports = {
 
   async userInfo(req, res) {
     try {
-      User.findOne({'token': req.headers.authorization}).then(data => {
+      User.findOne({'id': req.body.userId}).then(data => {
         res.status(200).send({
           code: 0,
           data: {

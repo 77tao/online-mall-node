@@ -3,7 +3,9 @@ const secretOrPrivateKey = 'exclusive';
 module.exports = {
 
   createToken(content) {
-    let token = jwt.sign(content, secretOrPrivateKey)
+    let token = jwt.sign(content, secretOrPrivateKey, {
+      expiresIn: '7d'
+    })
     return token
   },
 

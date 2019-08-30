@@ -17,10 +17,6 @@ var user = new mongoose.Schema({
     required: true,
     type: String
   },
-  token: {
-    type: String,
-    default: ''
-  },
   create_time: {
     required: true,
     type: Date,
