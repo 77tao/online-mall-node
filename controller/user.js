@@ -1,5 +1,6 @@
 var User = require('../database/modules/user');
 var Token = require('../middleware/token');
+var md5 = require('../middleware/md5');
 var chalk = require('chalk');
 module.exports = {
   async register(req, res) {
@@ -14,6 +15,8 @@ module.exports = {
           return
         }
         var user = new User(req.body);
+        var hash = md5.createHash(user.password);
+        user.password = hash;
         user.save().then(() => {
           res.status(200).send({
             code: 0,
@@ -31,7 +34,8 @@ module.exports = {
   async login(req, res) {
     try {
       User.findOne({'email': req.body.loginName}).then(data => {
-        if (data !== null && data.password === req.body.password) {
+        var password = md5.createHash(req.body.password);
+        if (data !== null && data.password === password) {
           let content = { name: req.body.loginName };
           let token = Token.createToken(content);
           console.log(chalk.green('Token create success: ' + token));
