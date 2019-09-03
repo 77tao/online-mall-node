@@ -11,6 +11,8 @@ router.post('/login', user.login);
 
 router.get('/userInfo', user.userInfo);
 
+router.get('/oauth/redirect', user.oauth);
+
 router.get('/getCarousel', home.getCarousel);
 
 router.get('/getNews', home.getNews);

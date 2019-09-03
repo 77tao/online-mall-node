@@ -1,28 +1,37 @@
 var mongoose = require('mongoose');
 
 var user = new mongoose.Schema({
-  name: {
+  openid: {
+    type:Number,
+  },
+  avatar: {
+   type: String
+  },
+  name: { //名称
     required: true,
     type: String
   },
-  email: {
+  email: { //邮箱
     type: String,
     default: ''
   },
-  phone: {
+  phone: { // 手机号
     type: Number,
     default: '',
   },
-  password: {
+  password: { // 密码
     required: true,
     type: String
   },
-  create_time: {
+  registerType: { // 注册方式 1 邮箱 2 手机 3.第三方
+    type: Number
+  },
+  create_time: { // 创建时间
     required: true,
     type: Date,
     default: Date.now
   },
-  update_time: {
+  update_time: { // 修改时间
     required: true,
     type: Date,
     default: Date.now
