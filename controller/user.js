@@ -9,6 +9,7 @@ var clientSecret = '2d8bd797aed3c83631cc27cb5e53b2ccfc3bf41a';
 module.exports = {
   async register(req, res) {
     try {
+      // 验证用户是否存在
       let { email } = req.body
       User.findOne({'email': email}).then(data => {
         if (data) {
@@ -18,10 +19,11 @@ module.exports = {
           });
           return
         }
-        console.log(req.body);
+        // 存入用户数据
         var user = new User(req.body);
         var hash = md5.createHash(user.password);
         user.password = hash;
+        user.role = "R";
         user.save().then((data) => {
           console.log(chalk.green('User create success !'));
           var content = { name: req.body.name };
@@ -47,7 +49,34 @@ module.exports = {
     try {
       User.findOne({'email': req.body.loginName}).then(data => {
         var password = md5.createHash(req.body.password);
-        if (data !== null && data.password === password) {
+        if (data !== null && data.password === password && data.role === 'R') {
+          var content = { name: req.body.loginName };
+          var token = Token.createToken(content);
+          console.log(chalk.green('Token create success: ' + token));
+          res.status(200).send({
+            code: 0,
+            data: ({
+              token: token,
+              userId:data.id
+            })
+          })
+        } else {
+          res.status(200).send({
+            code: 1,
+            message: '账号不存在或密码错误',
+          })
+        }
+      })
+    } catch (err) {
+      res.status(400)
+    }
+  },
+
+  async internalLogin(req, res) {
+    try {
+      User.findOne({'email': req.body.loginName}).then(data => {
+        var password = md5.createHash(req.body.password);
+        if (data !== null && data.password === password && data.role !== 'R') {
           var content = { name: req.body.loginName };
           var token = Token.createToken(content);
           console.log(chalk.green('Token create success: ' + token));
@@ -163,12 +192,24 @@ module.exports = {
   async userInfo(req, res) {
     try {
       User.findOne({'_id': req.query.userId}).then(data => {
-        console.log(data);
         res.status(200).send({
           code: 0,
           data: {
             userName: data ? data.name : ''
           }
+        })
+      })
+    } catch (err) {
+      res.status(400)
+    }
+  },
+
+  async getUserList(req, res) {
+    try {
+      User.find().then(data => {
+        res.status(200).send({
+          code: 0,
+          data: data
         })
       })
     } catch (err) {

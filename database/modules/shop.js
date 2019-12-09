@@ -1,34 +1,37 @@
 var mongoose = require('mongoose');
 
-var user = new mongoose.Schema({
-  openid: { //授权id
-    type:Number,
-  },
-  avatar: { //头像
-   type: String
-  },
-  name: { //名称
+var shop = new mongoose.Schema({
+  name: { //商品名称
     required: true,
     type: String
   },
-  email: { //邮箱
+  image: { //商品图片
+    required: true,
+    type: String
+  },
+  type: { // 商品类型
+    required: true,
+  },
+  describe: { //商品描述
     type: String,
     default: ''
   },
-  phone: { // 手机号
-    type: Number,
-    default: '',
-  },
-  password: { // 密码
+  price: { //商品价格
     required: true,
-    type: String
-  },
-  registerType: { // 注册方式 1 邮箱 2 手机 3.第三方
     type: Number
   },
-  role: { // 用户角色 R 注册用户 A管理员用户
+  video: { //商品视频
+    type: String,
+    default: ''
+  },
+  shop: { //所属商铺
     required: true,
-    type: "String",
+    type: Number,
+  },
+  capacity: { // 商品容量（数量）
+    required: true,
+    type: Number,
+    default: 0
   },
   create_time: { // 创建时间
     required: true,
@@ -50,6 +53,6 @@ var user = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-var User = mongoose.model('User', user, 'user');
+var Shop = mongoose.model('Shop', shop, 'shop');
 
-module.exports = User
+module.exports = Shop

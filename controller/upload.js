@@ -1,0 +1,27 @@
+// 上传相关接口
+module.exports = {
+  // 上传商品图片
+  async uploadShoppingImage (req, res) {
+    try {
+      console.log(req.file);
+      res.status(200).send({
+        data: 'success'
+      });
+    }catch (err) {
+      res.status(400);
+    }
+  },
+
+  // 上传商品logo
+  async uploadbrandLogo (req, res) {
+    try {
+      console.log(req.file);
+      res.status(200).send({
+        code: 0,
+        data: req.file
+      });
+    }catch (err) {
+      res.status(400);
+    }
+  },
+}
