@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 var multer  = require('multer');
 var user = require('../controller/user');
@@ -9,13 +10,15 @@ var shop = require('../controller/shop');
 var order = require('../controller/order');
 var token = require('../middleware/token');
 var shop_type = require('../controller/shop_type');
+var brand = require('../controller/brand');
 var upload = require('../controller/upload');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './upload/images');
+    cb(null, path.join(__dirname, '../public/image/brand/'));
   },
   filename: function (req, file, cb) {
+    console.log(file);
     cb(null, Date.now() + '-' + file.originalname);
   }
 })
@@ -41,6 +44,10 @@ router.get('/getAllShopTypeList', token.checkToken, shop_type.getAllShopTypeList
 router.put('/updateShopTypeStatus', token.checkToken, shop_type.updateShopTypeStatus);
 
 router.post('/uploadbrandLogo', imageAddress.single('file'), upload.uploadbrandLogo);
+
+router.post('/addBrand',token.checkToken, brand.addBrand);
+
+router.get('/getBrandList',brand.getBrandList);
 
 router.get('/getCarousel', carousel.getCarousel);
 
