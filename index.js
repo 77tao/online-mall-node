@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var chalk = require('chalk');
-var url = 'mongodb://admin:123456@167.179.84.139:27017/mall-test';
+var url = 'mongodb://localhost:27017/mall-test';
 
 mongoose.connect(url, {useNewUrlParser: true});
 

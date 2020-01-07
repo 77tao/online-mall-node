@@ -5,33 +5,15 @@ var shop = new mongoose.Schema({
     required: true,
     type: String
   },
-  image: { //商品图片
+  type: { // 商品所属分类
     required: true,
+  },
+  title: { // 商品标语
     type: String
   },
-  type: { // 商品类型
-    required: true,
-  },
-  describe: { //商品描述
-    type: String,
-    default: ''
-  },
-  price: { //商品价格
-    required: true,
-    type: Number
-  },
-  video: { //商品视频
-    type: String,
-    default: ''
-  },
-  shop: { //所属商铺
+  brand: { //所属品牌
     required: true,
     type: Number,
-  },
-  capacity: { // 商品容量（数量）
-    required: true,
-    type: Number,
-    default: 0
   },
   create_time: { // 创建时间
     required: true,

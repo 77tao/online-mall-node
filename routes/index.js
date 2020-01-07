@@ -47,9 +47,9 @@ router.post('/uploadbrandLogo', imageAddress.single('file'), upload.uploadbrandL
 
 router.post('/addBrand',token.checkToken, brand.addBrand);
 
-router.get('/getBrandList',brand.getBrandList);
+router.get('/getBrandList',token.checkToken, brand.getBrandList);
 
-router.get('/getCarousel', carousel.getCarousel);
+router.get('/getCarousel', token.checkToken, carousel.getCarousel);
 
 router.get('/getNews', news.getNews);
 

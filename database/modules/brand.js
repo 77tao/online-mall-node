@@ -13,6 +13,10 @@ var brand = new mongoose.Schema({
     required: true,
     type: Array
   },
+  status: { // 品牌状态 0-未审核 1-审核中 2审核通过 3审核未通过 （保留字段 暂时不做审核相关功能  暂时状态都为2）
+    require: true,
+    type: Number
+  },
   create_time: { // 创建时间
     required: true,
     type: Date,

@@ -19,6 +19,7 @@ module.exports = {
         var data = {};
         data.name = req.body.name;
         data.type = req.body.type;
+        data.status = 2;
         data.imageAddress = new Array();
         for(var i = 0; i < req.body.imageAddress.fileList.length; i++) {
           data.imageAddress.push(req.body.imageAddress.fileList[i].response.data.path);
@@ -39,7 +40,7 @@ module.exports = {
       res.status(400);
     }
   },
-
+  // 获取品牌信息列表
   async getBrandList(req, res) {
     try {
       Brand.find().then(data => {
