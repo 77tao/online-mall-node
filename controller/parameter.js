@@ -33,7 +33,8 @@ module.exports = {
   // 获取参数信息列表
   async getParameterList(req, res) {
     try {
-      Parameter.find().then(data => {
+      const typeId = req.query.typeId;
+      Parameter.find({'typeId': typeId}).then(data => {
         res.status(200).send({
           code:0,
           data:data
