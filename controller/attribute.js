@@ -33,8 +33,8 @@ module.exports = {
   // 获取属性信息列表
   async getAttributeList(req, res) {
     try {
-      const typeId = req.query.typeId;
-      Attribute.find({'typeId': typeId}).then(data => {
+      // const typeId = req.query.typeId;
+      Attribute.find().then(data => {
         res.status(200).send({
           code:0,
           data:data

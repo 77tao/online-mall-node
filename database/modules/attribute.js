@@ -9,6 +9,10 @@ var attribute = new mongoose.Schema({
     required: true,
     type: Array
   },
+  enter: { //属性录入方式
+    required: true,
+    type: String
+  },
   typeId: {
     required: true,
     type: String
