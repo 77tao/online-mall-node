@@ -56,5 +56,23 @@ module.exports = {
     }catch (err) {
       res.status(400);
     }
+  },
+
+  async getTypeBrandList(req, res){
+    try {
+      let { typeId } = req.query;
+      Brand.find({"type": typeId}).then(data => {
+        data.forEach(index => {
+          var imageAddress = path.parse(index.imageAddress[0]);
+          index.imageAddress = req.protocol + "://" + req.hostname + ':3000/image/brand/' + imageAddress.base;
+        })
+        res.status(200).send({
+          code:0,
+          data:data
+        })
+      })
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

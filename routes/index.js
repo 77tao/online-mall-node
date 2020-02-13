@@ -51,11 +51,17 @@ router.post('/addBrand',token.checkToken, brand.addBrand);
 
 router.get('/getBrandList',token.checkToken, brand.getBrandList);
 
-router.post('/addAttribute',token.checkToken, attribute.addAttribute);
+router.get("/getTypeBrandList", token.checkToken, brand.getTypeBrandList);
+
+router.post('/addAttribute', token.checkToken, attribute.addAttribute);
 
 router.get('/getAttributeList', token.checkToken, attribute.getAttributeList);
 
-router.post('/addParameter',token.checkToken, parameter.addParameter);
+router.post('/updateAttribute', token.checkToken, attribute.updateAttribte);
+
+router.get("/getTypeAttributeList", token.checkToken, attribute.getTypeAttributeList);
+
+router.post('/addParameter', token.checkToken, parameter.addParameter);
 
 router.get('/getParameterList', token.checkToken, parameter.getParameterList);
 
