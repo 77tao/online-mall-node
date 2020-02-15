@@ -69,6 +69,12 @@ router.post('/addParameter', token.checkToken, parameter.addParameter);
 
 router.get('/getParameterList', token.checkToken, parameter.getParameterList);
 
+router.get("/getParameter", token.checkToken, parameter.getParameter);
+
+router.post("/updateParameter", token.checkToken, parameter.updateParameter);
+
+router.post("/removeParameter", token.checkToken, parameter.removeParameter);
+
 router.get('/getCarousel', token.checkToken, carousel.getCarousel);
 
 router.get('/getNews', news.getNews);

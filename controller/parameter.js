@@ -1,4 +1,5 @@
 var Parameter = require('../database/modules/parameter');
+var ObjectId = require('mongodb').ObjectId;
 var chalk = require('chalk');
 //参数信息相关接口
 module.exports = {
@@ -30,6 +31,48 @@ module.exports = {
       res.status(400);
     }
   },
+
+  //修改单个参数
+  async updateParameter(req, res) {
+    try {
+      let { id } = req.body;
+      Parameter.findOne({'_id': id}).then(data => {
+        if (data) {
+          let condition = {_id:ObjectId(id)};
+          Parameter.updateOne(condition, req.body).then(data => {
+            res.status(200).send({
+              code: 0,
+              message: '修改成功',
+            })
+          }).catch((err) => {
+            res.status(500);
+            console.log(err);
+          })
+        }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // 根据参数id获取参数信息
+  async getParameter(req, res) {
+    try {
+      let { id } = req.query;
+      Parameter.find({ "_id":id }).then(data => {
+        res.status(200).send({
+          code:0,
+          data:data
+        })
+      }).catch((err) => {
+        res.status(500);
+        console.log(err);
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   // 获取参数信息列表
   async getParameterList(req, res) {
     try {
@@ -42,6 +85,28 @@ module.exports = {
       })
     }catch (err) {
       res.status(400);
+    }
+  },
+
+  //删除某个参数
+  async removeParameter(req, res) {
+    try {
+      let { id } = req.body;
+      Parameter.findOne({"_id": id}).then(data => {
+        if (data) {
+          Parameter.deleteOne({"_id": id}).then(data => {
+            res.status(200).send({
+              code: 0,
+              message: '删除成功',
+            })
+          }).catch(err => {
+            res.status(500);
+            console.log(err);
+          })
+        }
+      })
+    } catch (err) {
+      console.log(err);
     }
   }
 }

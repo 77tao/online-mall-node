@@ -39,7 +39,6 @@ module.exports = {
       Attribute.findOne({'_id': id}).then(data => {
         if (data) {
           let condition = {_id:ObjectId(id)};
-          console.log('df');
           Attribute.updateOne(condition, req.body).then(data => {
             res.status(200).send({
               code: 0,
