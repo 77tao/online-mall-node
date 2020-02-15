@@ -57,7 +57,11 @@ router.post('/addAttribute', token.checkToken, attribute.addAttribute);
 
 router.get('/getAttributeList', token.checkToken, attribute.getAttributeList);
 
+router.get('/getAttribute', token.checkToken, attribute.getAttribute);
+
 router.post('/updateAttribute', token.checkToken, attribute.updateAttribte);
+
+router.post("/removeAttribute", token.checkToken, attribute.removeAttribute);
 
 router.get("/getTypeAttributeList", token.checkToken, attribute.getTypeAttributeList);
 

@@ -1,4 +1,5 @@
 var Attribute = require('../database/modules/attribute');
+var ObjectId = require('mongodb').ObjectId;
 var chalk = require('chalk');
 //属性信息相关接口
 module.exports = {
@@ -35,16 +36,16 @@ module.exports = {
   async updateAttribte(req, res) {
     try {
       let { id } = req.body;
-      Attribute.findOne({'id': id}).then(data => {
+      Attribute.findOne({'_id': id}).then(data => {
         if (data) {
-          var attribute = new Attribute(req.body);
-          attribute.update().then(data => {
-            console.log(chalk.green('attribute update success !'));
+          let condition = {_id:ObjectId(id)};
+          console.log('df');
+          Attribute.updateOne(condition, req.body).then(data => {
             res.status(200).send({
               code: 0,
-              message: "修改成功"
+              message: '修改成功',
             })
-          }).cathc((err) => {
+          }).catch((err) => {
             res.status(500);
             console.log(err);
           })
@@ -72,6 +73,24 @@ module.exports = {
     }
   },
 
+  //根据属性id查询某条属性
+  async getAttribute(req, res) {
+    try {
+      let { id } = req.query;
+      Attribute.find({ "_id":id }).then(data => {
+        res.status(200).send({
+          code:0,
+          data:data
+        })
+      }).catch((err) => {
+        res.status(500);
+        console.log(err);
+      })
+    } catch(err) {
+      console.log(err);
+    }
+  },
+
   // 根据类型获取属性列表
   async getTypeAttributeList(req, res) {
     try {
@@ -84,6 +103,28 @@ module.exports = {
       }).catch((err) => {
         res.status(500);
         console.log(err);
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  //删除某个属性
+  async removeAttribute(req, res) {
+    try {
+      let { id } = req.body;
+      Attribute.findOne({"_id": id}).then(data => {
+        if (data) {
+          Attribute.deleteOne({"_id": id}).then(data => {
+            res.status(200).send({
+              code: 0,
+              message: '删除成功',
+            })
+          }).catch(err => {
+            res.status(500);
+            console.log(err);
+          })
+        }
       })
     } catch (err) {
       console.log(err);
