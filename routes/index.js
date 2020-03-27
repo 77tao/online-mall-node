@@ -13,7 +13,8 @@ var shop_type = require('../controller/shop_type');
 var brand = require('../controller/brand');
 var upload = require('../controller/upload');
 var attribute = require('../controller/attribute');
-var parameter = require('../controller/parameter')
+var parameter = require('../controller/parameter');
+var store = require('../controller/store');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -55,8 +56,6 @@ router.get("/getTypeBrandList", token.checkToken, brand.getTypeBrandList);
 
 router.post('/addAttribute', token.checkToken, attribute.addAttribute);
 
-router.get('/getAttributeList', token.checkToken, attribute.getAttributeList);
-
 router.get('/getAttribute', token.checkToken, attribute.getAttribute);
 
 router.post('/updateAttribute', token.checkToken, attribute.updateAttribte);
@@ -75,9 +74,15 @@ router.post("/updateParameter", token.checkToken, parameter.updateParameter);
 
 router.post("/removeParameter", token.checkToken, parameter.removeParameter);
 
+router.post("/addStore", token.checkToken, store.addStore);
+
+router.get("/getStoreList", token.checkToken, store.getStoreList);
+
 router.get('/getCarousel', token.checkToken, carousel.getCarousel);
 
 router.get('/getNews', news.getNews);
+
+router.post('/addShopping', shop.addShopping);
 
 router.get('/getSeckillShopping', shop.getSeckillShopping);
 

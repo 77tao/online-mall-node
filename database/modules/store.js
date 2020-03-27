@@ -1,33 +1,17 @@
 var mongoose = require('mongoose');
 
-var attribute = new mongoose.Schema({
-  name: { //属性名称
+var store = new mongoose.Schema({
+  name: { //店铺名称
     required: true,
     type: String
   },
-  key: { //属性key
+  type: { //所属分类
+    required: true,
+    type: Array
+  },
+  status: { // 店铺状态
     required: true,
     type: String
-  },
-  enter: { //属性录入方式
-    required: true,
-    type: String
-  },
-  typeId: { // 类型id
-    required: true,
-    type: String
-  },
-  multiple: { // 是否支持多选
-    required: true,
-    type: Boolean
-  },
-  status: { // 是否开启该属性
-    required: true,
-    type: Boolean
-  },
-  news: { // 是否支持新增
-    required: true,
-    type: Boolean
   },
   create_time: { // 创建时间
     required: true,
@@ -49,6 +33,6 @@ var attribute = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-var attribute = mongoose.model('attribute', attribute, 'attribute');
+var store = mongoose.model('store', store, 'store');
 
-module.exports = attribute
+module.exports = store
