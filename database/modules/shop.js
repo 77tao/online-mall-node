@@ -13,6 +13,10 @@ var shop = new mongoose.Schema({
     required: true,
     type: String
   },
+  pictureList: { // 商品图片
+    required: true,
+    type: Array
+  },
   status: { //商品状态
     required: true,
     type: Number

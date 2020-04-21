@@ -1,10 +1,11 @@
 // 上传相关接口
 module.exports = {
   // 上传商品图片
-  async uploadShoppingImage (req, res) {
+  async uploadCommodityImage (req, res) {
     try {
       res.status(200).send({
-        data: 'success'
+        code: 0,
+        data: req.file
       });
     }catch (err) {
       res.status(400);

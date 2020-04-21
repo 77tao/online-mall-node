@@ -6,7 +6,7 @@ var ObjectId = require('mongodb').ObjectId;
 module.exports = {
   // 添加商品
   async addShopping (req, res) {
-    let { type, name, title, brand, content, attributeList, attributeTableList, 
+    let { type, name, title, brand, commidityImageList, content, attributeList, attributeTableList, 
       parameterList, presell, serverGuarantees, site, cost, status } = req.body;
     const shopList = {};
     shopList.name = name;
@@ -14,6 +14,7 @@ module.exports = {
     shopList.title = title;
     shopList.status = status;
     shopList.brand = brand;
+    shopList.pictureList = commidityImageList.fileList;
     shopList.content = content;
     shopList.attribute_list = attributeList;
     shopList.parameter_list = parameterList;

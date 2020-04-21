@@ -16,17 +16,25 @@ var attribute = require('../controller/attribute');
 var parameter = require('../controller/parameter');
 var store = require('../controller/store');
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../public/image/brand/'));
-  },
-  filename: function (req, file, cb) {
-    console.log(file);
-    cb(null, Date.now() + '-' + file.originalname);
-  }
+var brandAddress = multer({ storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, '../public/image/brand/'));
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname);
+    }
+  }) 
 })
 
-var imageAddress = multer({ storage: storage })
+var commodityAddress =  multer({ storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, '../public/image/commidity/'));
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname);
+    }
+  }) 
+})
 
 router.post('/register', user.register);
 
@@ -46,7 +54,9 @@ router.get('/getAllShopTypeList', token.checkToken, shop_type.getAllShopTypeList
 
 router.put('/updateShopTypeStatus', token.checkToken, shop_type.updateShopTypeStatus);
 
-router.post('/uploadbrandLogo', imageAddress.single('file'), upload.uploadbrandLogo);
+router.post('/uploadbrandLogo', brandAddress.single('file'), upload.uploadbrandLogo);
+
+router.post('/uploadCommodityImage', commodityAddress.single('file'), upload.uploadCommodityImage);
 
 router.post('/addBrand',token.checkToken, brand.addBrand);
 

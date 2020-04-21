@@ -21,10 +21,6 @@ var sku = new mongoose.Schema({
     required: true,
     type: Number
   },
-  // picture: { // 商品图片
-  //   required: true,
-  //   type: String
-  // },
   create_time: { // 创建时间
     required: true,
     type: Date,
