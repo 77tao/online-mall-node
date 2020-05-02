@@ -17,24 +17,26 @@ import store from '../controller/store';
 
 let router = express.Router();
 
-let brandAddress = multer({ storage: multer.diskStorage({
+let brandAddress = multer({
+  storage: multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join(__dirname, '../public/image/brand/'));
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname);
     }
-  }) 
+  })
 })
 
-let commodityAddress =  multer({ storage: multer.diskStorage({
+let commodityAddress = multer({
+  storage: multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join(__dirname, '../public/image/commidity/'));
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname);
     }
-  }) 
+  })
 })
 
 router.post('/register', user.register);
@@ -59,9 +61,9 @@ router.post('/uploadbrandLogo', brandAddress.single('file'), upload.uploadbrandL
 
 router.post('/uploadCommodityImage', commodityAddress.single('file'), upload.uploadCommodityImage);
 
-router.post('/addBrand',token.checkToken, brand.addBrand);
+router.post('/addBrand', token.checkToken, brand.addBrand);
 
-router.get('/getBrandList',token.checkToken, brand.getBrandList);
+router.get('/getBrandList', token.checkToken, brand.getBrandList);
 
 router.get("/getTypeBrandList", token.checkToken, brand.getTypeBrandList);
 

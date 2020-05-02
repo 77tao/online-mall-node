@@ -6,7 +6,7 @@ export default {
   // 添加商品
   async addShop(shopList) {
     try {
-      return await new Promise((resolve,reject) => {
+      return await new Promise((resolve, reject) => {
         const shop = new Shop(shopList);
         shop.save().then((data) => {
           resolve(data);
@@ -18,11 +18,11 @@ export default {
       console.log(err);
     }
   },
-  
+
   // 添加sku
-  async addSku (skuList) {
+  async addSku(skuList) {
     try {
-      return await new Promise((resolve,reject) => {
+      return await new Promise((resolve, reject) => {
         const sku = new Sku(skuList);
         sku.save().then((data) => {
           resolve(data);

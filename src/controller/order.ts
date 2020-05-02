@@ -1,10 +1,10 @@
 export default {
-  async getOrder (req, res) {
+  async getOrder(req, res) {
     try {
       res.status(200).send({
         data: 'success'
       })
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },

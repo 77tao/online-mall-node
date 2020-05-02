@@ -4,8 +4,8 @@ import repertroyService from '../service/repertroy';
 
 export default {
   // 添加商品
-  async addShopping (req, res) {
-    let { type, name, title, brand, commidityImageList, content, attributeList, attributeTableList, 
+  async addShopping(req, res) {
+    let { type, name, title, brand, commidityImageList, content, attributeList, attributeTableList,
       parameterList, presell, serverGuarantees, site, cost, status } = req.body;
     const shopList = {
       name: name,
@@ -46,23 +46,23 @@ export default {
   },
 
   // 获取秒杀商品
-  async getSeckillShopping (req, res) {
+  async getSeckillShopping(req, res) {
     try {
       res.status(200).send({
         data: 'success'
       });
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },
-  
+
   // 获取购物车商品
-  async getTrolleyShopping (req, res) {
+  async getTrolleyShopping(req, res) {
     try {
       res.status(200).send({
         data: 'success'
       });
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },

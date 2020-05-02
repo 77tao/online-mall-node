@@ -3,7 +3,7 @@ const secretOrPrivateKey = 'exclusive';
 export default {
 
   // 创建token
-  createToken (content) {
+  createToken(content) {
     let token = jwt.sign(content, secretOrPrivateKey, {
       expiresIn: '7d'
     })
@@ -11,7 +11,7 @@ export default {
   },
 
   // 检查token
-  checkToken (req, res, next) {
+  checkToken(req, res, next) {
     jwt.verify(req.headers.authorization, secretOrPrivateKey, (err) => {
       if (err) {
         res.status(401).send("认证失败，请重新登录");

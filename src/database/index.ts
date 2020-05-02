@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import chalk from 'chalk';
 const url = 'mongodb://localhost:27017/mall-test';
 
-mongoose.connect(url, {useNewUrlParser: true});
+mongoose.connect(url, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 

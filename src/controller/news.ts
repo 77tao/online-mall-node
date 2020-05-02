@@ -2,12 +2,12 @@
 
 export default {
   // 获取新闻
-  async getNews (req, res) {
+  async getNews(req, res) {
     try {
       res.status(200).send({
         data: 'success'
       });
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },

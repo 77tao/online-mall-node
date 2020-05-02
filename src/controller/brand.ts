@@ -4,7 +4,7 @@ import brandService from '../service/brand';
 //品牌信息相关接口
 export default {
   // 添加品牌信息
-  async addBrand (req, res) {
+  async addBrand(req, res) {
     try {
       let { name } = req.body
       let result = await brandService.isBrandName(name);
@@ -16,7 +16,7 @@ export default {
           status: 2,
           imageAddress: []
         };
-        for(let i = 0; i < req.body.imageAddress.fileList.length; i++) {
+        for (let i = 0; i < req.body.imageAddress.fileList.length; i++) {
           brandData.imageAddress.push(req.body.imageAddress.fileList[i].response.data.path);
         }
         await brandService.addBrand(brandData);
@@ -31,7 +31,7 @@ export default {
           message: '品牌名称已存在',
         });
       }
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },
@@ -45,16 +45,16 @@ export default {
           index.imageAddress = req.protocol + "://" + req.hostname + ':3000/image/brand/' + imageAddress.base;
         })
         res.status(200).send({
-          code:0,
-          data:result
+          code: 0,
+          data: result
         })
       };
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },
   // 根据类型获取品牌列表
-  async getTypeBrandList(req, res){
+  async getTypeBrandList(req, res) {
     try {
       let { typeId } = req.query;
       let result: any = await brandService.getTypeBrandList(typeId);
@@ -64,8 +64,8 @@ export default {
           index.imageAddress = req.protocol + "://" + req.hostname + ':3000/image/brand/' + imageAddress.base;
         })
         res.status(200).send({
-          code:0,
-          data:result
+          code: 0,
+          data: result
         })
       }
     } catch (err) {

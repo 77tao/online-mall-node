@@ -1,12 +1,12 @@
 import Brand from '../database/modules/brand';
 
 export default {
-  
+
   // 判断是否已存在
-  async isBrandName (name) {
+  async isBrandName(name) {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.findOne({'name': name}).then(data => {
+        Brand.findOne({ 'name': name }).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -18,9 +18,9 @@ export default {
   },
 
   // 添加品牌
-  async addBrand (brandList: Array<Object>) {
+  async addBrand(brandList: Array<Object>) {
     try {
-      return await new Promise((resolve,reject) => {
+      return await new Promise((resolve, reject) => {
         const brand = new Brand(brandList);
         brand.save().then((data) => {
           resolve(data);
@@ -34,9 +34,9 @@ export default {
   },
 
   // 获取品牌信息列表
-  async getBrandList () {
+  async getBrandList() {
     try {
-      return await new Promise((resolve,reject) => {
+      return await new Promise((resolve, reject) => {
         Brand.find().then(data => {
           resolve(data);
         })
@@ -47,10 +47,10 @@ export default {
   },
 
   // 根据类型获取品牌列表
-  async getTypeBrandList (typeId) {
+  async getTypeBrandList(typeId) {
     try {
-      return await new Promise((resolve,reject) => {
-        Brand.find({"type": typeId}).then(data => {
+      return await new Promise((resolve, reject) => {
+        Brand.find({ "type": typeId }).then(data => {
           resolve(data);
         })
       });

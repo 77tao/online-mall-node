@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 //属性信息相关接口
 export default {
   // 添加属性信息
-  async addAttribute (req, res) {
+  async addAttribute(req, res) {
     try {
       let { typeId, enter, name, key, multiple, status, news, attribute } = req.body;
       let attributeList: any = {
@@ -16,7 +16,7 @@ export default {
         news: news,
         key: key
       };
-      let result = await attributeService.isAttributeName(name,typeId);
+      let result = await attributeService.isAttributeName(name, typeId);
       if (result == null) {
         const attributeResult: any = await attributeService.addAttribute(attributeList);
         let attribute_id = attributeResult.id;
@@ -56,11 +56,11 @@ export default {
           status: status,
           news: news
         };
-        let condition = {_id:ObjectId(id)};
+        let condition = { _id: ObjectId(id) };
         await attributeService.updateAttribute(condition, obj);
-        for(let i = 0; i < attributeValueId.length; i++) {
-          let condition = {_id:ObjectId(attributeValueId[i])};
-          await attributeService.updateAttributeValue(condition, {attribute_value:attribute[i]});
+        for (let i = 0; i < attributeValueId.length; i++) {
+          let condition = { _id: ObjectId(attributeValueId[i]) };
+          await attributeService.updateAttributeValue(condition, { attribute_value: attribute[i] });
         };
         res.status(200).send({
           code: 0,
@@ -98,11 +98,11 @@ export default {
         obj['attribute'] = arr;
         obj['attributeValueId'] = idArr;
         res.status(200).send({
-          code:0,
+          code: 0,
           data: obj
         });
       };
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   },
@@ -164,7 +164,7 @@ export default {
           message: "属性不存在",
         });
       }
-      
+
     } catch (err) {
       console.log(err);
     }

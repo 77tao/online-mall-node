@@ -5,24 +5,24 @@ import { type } from 'os';
 //参数信息相关接口
 export default {
   // 添加参数信息
-  async addParameter (req, res) {
+  async addParameter(req, res) {
     try {
       let { name } = req.body
       let result = parameterService.isParameterName(name);
-      if (result == null ) {
+      if (result == null) {
         await parameterService.addParameter(req.body);
         console.log(chalk.green('parameter create success !'));
         res.status(200).send({
           code: 0,
           message: '添加成功',
         })
-      } else  {
+      } else {
         res.status(200).send({
           code: 1,
           message: '参数称已存在',
         });
       }
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },
@@ -32,14 +32,14 @@ export default {
     try {
       let { id } = req.body;
       let result = parameterService.isParameterId(id);
-      if (result == null ) {
+      if (result == null) {
         res.status(200).send({
           code: 1,
           message: '参数不存在',
         })
       } else {
-        let condition = {_id:ObjectId(id)};
-        await parameterService.updateParameter(condition,req.body);
+        let condition = { _id: ObjectId(id) };
+        await parameterService.updateParameter(condition, req.body);
         console.log(chalk.green('parameter update success !'));
         res.status(200).send({
           code: 0,
@@ -59,8 +59,8 @@ export default {
       if (result != null) {
         let data = parameterService.getParameterId(id);
         res.status(200).send({
-          code:0,
-          data:data
+          code: 0,
+          data: data
         })
       }
     } catch (err) {
@@ -74,10 +74,10 @@ export default {
       const typeId = req.query.typeId;
       let data = parameterService.getParameterTypeList(typeId);
       res.status(200).send({
-        code:0,
-        data:data
+        code: 0,
+        data: data
       })
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },

@@ -3,10 +3,10 @@ import md5 from '../middleware/md5';
 
 export default {
   // 验证邮箱是否存在
-  async isUserEmail (email) {
+  async isUserEmail(email) {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne({'email': email}).then(data => {
+        User.findOne({ 'email': email }).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -18,10 +18,10 @@ export default {
   },
 
   // 验证邮箱是否存在
-  async isUserId (id) {
+  async isUserId(id) {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne({'openid': id}).then(data => {
+        User.findOne({ 'openid': id }).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -33,7 +33,7 @@ export default {
   },
 
   // 添加用户
-  async addUser (userData) {
+  async addUser(userData) {
     try {
       return await new Promise((resolve, reject) => {
         const user: any = new User(userData);
@@ -51,10 +51,10 @@ export default {
     }
   },
 
-  async updateUser (id,outhData) {
+  async updateUser(id, outhData) {
     try {
       return await new Promise((resolve, reject) => {
-        User.updateOne({'openid': id}, outhData).then(data => {
+        User.updateOne({ 'openid': id }, outhData).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -66,10 +66,10 @@ export default {
   },
 
   // 获取用户信息
-  async getUserInfo (id) {
+  async getUserInfo(id) {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne({'_id': id}).then(data => {
+        User.findOne({ '_id': id }).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -81,7 +81,7 @@ export default {
   },
 
   // 获取用户信息列表
-  async getUserList () {
+  async getUserList() {
     try {
       return await new Promise((resolve, reject) => {
         User.findOne().then(data => {

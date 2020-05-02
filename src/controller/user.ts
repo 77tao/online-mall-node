@@ -23,7 +23,7 @@ export default {
           code: 0,
           data: ({
             token: token,
-            userId:data.id
+            userId: data.id
           })
         })
       } else {
@@ -55,7 +55,7 @@ export default {
             code: 0,
             data: ({
               token: token,
-              userId:result.id
+              userId: result.id
             })
           })
         }
@@ -83,7 +83,7 @@ export default {
             code: 0,
             data: ({
               token: token,
-              userId:result.id
+              userId: result.id
             })
           })
         }
@@ -101,9 +101,9 @@ export default {
       //通过授权码获取令牌
       const tokenResponse = await axios({
         url: 'https://github.com/login/oauth/access_token?' +
-        `client_id=${clientID}&` +
-        `client_secret=${clientSecret}&` +
-        `code=${code}`,
+          `client_id=${clientID}&` +
+          `client_secret=${clientSecret}&` +
+          `code=${code}`,
         method: 'post',
         headers: {
           accept: 'application/json'
@@ -125,7 +125,7 @@ export default {
       let result = await userService.isUserId(request.data.id);
 
       if (result == null) {
-        const randomNum = util.createRandom(8,15); //生成随机数
+        const randomNum = util.createRandom(8, 15); //生成随机数
         const password = md5.createHash(randomNum); //生成随机密码
         //保存第三方数据到数据库
         let outhData = {
@@ -146,7 +146,7 @@ export default {
           code: 0,
           data: ({
             token: token,
-            userId:data.id
+            userId: data.id
           })
         })
       } else {
@@ -156,7 +156,7 @@ export default {
           email: request.data.email,
           avatar: request.data.avatar_url
         };
-        let data: any = await userService.updateUser(request.data.id,outhData);
+        let data: any = await userService.updateUser(request.data.id, outhData);
         console.log(chalk.green('User update success !'));
         // 生成token
         const content = { name: request.data.name };

@@ -2,12 +2,12 @@
 
 export default {
   // 获取频道分类
-  async getChannelType (req, res) {
+  async getChannelType(req, res) {
     try {
       res.status(200).send({
         data: 'success'
       });
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   }

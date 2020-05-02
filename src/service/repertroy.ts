@@ -2,9 +2,9 @@ import Repertory from '../database/modules/repertory';
 
 export default {
   // 添加库存信息
-  async addRepertory (repertoryList) {
+  async addRepertory(repertoryList) {
     try {
-      return await new Promise((resolve,reject) => {
+      return await new Promise((resolve, reject) => {
         const repertory = new Repertory(repertoryList);
         repertory.save().then((data) => {
           resolve(data);

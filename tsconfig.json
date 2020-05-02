@@ -6,10 +6,10 @@
     "lib": [
       "es7"
     ],
-    "outDir":"./build",
+    "outDir": "./build",
     "esModuleInterop": true,
     "declaration": true,
-    "watch":true,
+    "watch": true,
   },
   "include": [
     "*.ts"

@@ -2,11 +2,11 @@ import storeService from '../service/store';
 
 export default {
   // 添加店铺
-  async addStore (req,res) {
+  async addStore(req, res) {
     try {
       let { name, typeId } = req.body;
-      let result = await storeService.isStoreName(name,typeId);
-      if (result == null ) {
+      let result = await storeService.isStoreName(name, typeId);
+      if (result == null) {
         await storeService.addStore(req.body);
         res.status(200).send({
           code: 0,
@@ -24,7 +24,7 @@ export default {
   },
 
   // 获取店铺列表
-  async getStoreList (req, res) {
+  async getStoreList(req, res) {
     try {
       let result = await storeService.getStoreList();
       if (result) {
@@ -32,7 +32,7 @@ export default {
           code: 0,
           data: result,
         });
-      } else  {
+      } else {
         res.status(200).send({
           code: 1,
           message: "获取失败",

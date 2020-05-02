@@ -4,7 +4,7 @@ export default {
   // 添加店铺
   async addStore(storeList) {
     try {
-      return await new Promise((resolve,reject) => {
+      return await new Promise((resolve, reject) => {
         const store = new Store(storeList);
         store.save().then((data) => {
           resolve(data);
@@ -17,10 +17,10 @@ export default {
     }
   },
   //判断商铺名是否存在
-  async isStoreName (name,typeId) {
+  async isStoreName(name, typeId) {
     try {
       return await new Promise((resolve, reject) => {
-        Store.findOne({'name': name, 'typeId': typeId}).then(data => {
+        Store.findOne({ 'name': name, 'typeId': typeId }).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -31,7 +31,7 @@ export default {
     }
   },
   // 获取店铺列表
-  async getStoreList () {
+  async getStoreList() {
     try {
       return await new Promise((resolve, reject) => {
         Store.find().then(data => {

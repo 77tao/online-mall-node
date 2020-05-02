@@ -2,10 +2,10 @@ import ShopType from '../database/modules/shop_type';
 
 export default {
   // 验证商品类型是否存在
-  async isShopTypeName (name) {
+  async isShopTypeName(name) {
     try {
       return await new Promise((resolve, reject) => {
-        ShopType.findOne({'name': name}).then(data => {
+        ShopType.findOne({ 'name': name }).then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);
@@ -17,7 +17,7 @@ export default {
   },
 
   // 添加商品类型
-  async addShopType (shopTypeData) {
+  async addShopType(shopTypeData) {
     try {
       return await new Promise((resolve, reject) => {
         const shopType = new ShopType(shopTypeData);
@@ -32,7 +32,7 @@ export default {
     }
   },
 
-  async getAllShopTypeList () {
+  async getAllShopTypeList() {
     try {
       return await new Promise((resolve, reject) => {
         ShopType.find().then(data => {
@@ -46,7 +46,7 @@ export default {
     }
   },
 
-  async updateShopTypeStatus (condition, updateData) {
+  async updateShopTypeStatus(condition, updateData) {
     try {
       return await new Promise((resolve, reject) => {
         ShopType.updateOne(condition, updateData).then(data => {

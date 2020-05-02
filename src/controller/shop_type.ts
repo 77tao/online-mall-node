@@ -4,7 +4,7 @@ import shopTypeService from '../service/shop_type';
 // 商品类型相关接口
 export default {
   // 添加商品类型
-  async addShopType (req, res) {
+  async addShopType(req, res) {
     try {
       // 验证类型名称是否存在
       let { name } = req.body
@@ -27,23 +27,23 @@ export default {
     }
   },
   // 获取商品类型列表
-  async getAllShopTypeList (req, res) {
+  async getAllShopTypeList(req, res) {
     try {
       let data = await shopTypeService.getAllShopTypeList();
       res.status(200).send({
         code: 0,
         data: data
       });
-    }catch (err) {
+    } catch (err) {
       res.status(400);
     }
   },
   // 更改商品类型状态
   async updateShopTypeStatus(req, res) {
     try {
-      let { id,status } = req.body;
-      let condition = {_id:ObjectId(id)};
-      let updateData = {$set: {'status': status}};
+      let { id, status } = req.body;
+      let condition = { _id: ObjectId(id) };
+      let updateData = { $set: { 'status': status } };
       await shopTypeService.updateShopTypeStatus(condition, updateData);
       res.status(200).send({
         code: 0,
