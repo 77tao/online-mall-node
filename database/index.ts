@@ -4,7 +4,7 @@ const url = 'mongodb://localhost:27017/mall-test';
 
 mongoose.connect(url, {useNewUrlParser: true});
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 

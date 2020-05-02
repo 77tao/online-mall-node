@@ -5,7 +5,7 @@ export default {
   async addStore(storeList) {
     try {
       return await new Promise((resolve,reject) => {
-        var store = new Store(storeList);
+        const store = new Store(storeList);
         store.save().then((data) => {
           resolve(data);
         }).catch(err => {

@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import multer from 'multer';
-
 import channel from '../controller/channel';
 import attribute from '../controller/attribute';
 import user from '../controller/user';

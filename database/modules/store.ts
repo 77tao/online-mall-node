@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var store = new mongoose.Schema({
+const store_entity = new mongoose.Schema({
   name: { //店铺名称
     required: true,
     type: String
@@ -33,6 +33,6 @@ var store = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-var store = mongoose.model('store', store, 'store');
+const store = mongoose.model('store', store_entity, 'store');
 
-module.exports = store
+export default store

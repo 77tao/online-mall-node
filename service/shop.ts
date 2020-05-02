@@ -7,7 +7,7 @@ export default {
   async addShop(shopList) {
     try {
       return await new Promise((resolve,reject) => {
-        var shop = new Shop(shopList);
+        const shop = new Shop(shopList);
         shop.save().then((data) => {
           resolve(data);
         }).catch(err => {
@@ -23,7 +23,7 @@ export default {
   async addSku (skuList) {
     try {
       return await new Promise((resolve,reject) => {
-        var sku = new Sku(skuList);
+        const sku = new Sku(skuList);
         sku.save().then((data) => {
           resolve(data);
         }).catch(err => {

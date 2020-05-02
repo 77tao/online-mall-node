@@ -1,22 +1,16 @@
-import Brand from '../database/modules/brand';
 import chalk from 'chalk';
 import path from 'path';
+import brandService from '../service/brand';
 //品牌信息相关接口
 export default {
   // 添加品牌信息
   async addBrand (req, res) {
     try {
       let { name } = req.body
-      Brand.findOne({'name': name}).then(data => {
-        if (data) {
-          res.status(200).send({
-            code: 1,
-            message: '品牌名称已存在',
-          });
-          return
-        }
+      let result = await brandService.isBrandName(name);
+      if (result == null) {
         // 存入用户数据
-        let brandData = {
+        let brandData: any = {
           name: req.body.name,
           type: req.body.type,
           status: 2,
@@ -25,18 +19,18 @@ export default {
         for(let i = 0; i < req.body.imageAddress.fileList.length; i++) {
           brandData.imageAddress.push(req.body.imageAddress.fileList[i].response.data.path);
         }
-        let brand = new Brand(data);
-        brand.save().then((data) => {
-          console.log(chalk.green('brand create success !'));
-          res.status(200).send({
-            code: 0,
-            message: '添加成功',
-          })
-        }).catch((err) => {
-          res.status(500);
-          console.log(err);
+        await brandService.addBrand(brandData);
+        console.log(chalk.green('brand create success !'));
+        res.status(200).send({
+          code: 0,
+          message: '添加成功',
         })
-      });
+      } else {
+        res.status(200).send({
+          code: 1,
+          message: '品牌名称已存在',
+        });
+      }
     }catch (err) {
       res.status(400);
     }
@@ -44,34 +38,36 @@ export default {
   // 获取品牌信息列表
   async getBrandList(req, res) {
     try {
-      Brand.find().then(data => {
-        data.forEach(index => {
+      let result: any = await brandService.getBrandList();
+      if (result != null) {
+        result.forEach(index => {
           let imageAddress = path.parse(index.imageAddress[0]);
           index.imageAddress = req.protocol + "://" + req.hostname + ':3000/image/brand/' + imageAddress.base;
         })
         res.status(200).send({
           code:0,
-          data:data
+          data:result
         })
-      })
+      };
     }catch (err) {
       res.status(400);
     }
   },
-
+  // 根据类型获取品牌列表
   async getTypeBrandList(req, res){
     try {
       let { typeId } = req.query;
-      Brand.find({"type": typeId}).then(data => {
-        data.forEach(index => {
+      let result: any = await brandService.getTypeBrandList(typeId);
+      if (result != null) {
+        result.forEach(index => {
           let imageAddress = path.parse(index.imageAddress[0]);
           index.imageAddress = req.protocol + "://" + req.hostname + ':3000/image/brand/' + imageAddress.base;
         })
         res.status(200).send({
           code:0,
-          data:data
+          data:result
         })
-      })
+      }
     } catch (err) {
       console.log(err);
     }

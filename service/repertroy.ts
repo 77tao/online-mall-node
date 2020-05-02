@@ -5,7 +5,7 @@ export default {
   async addRepertory (repertoryList) {
     try {
       return await new Promise((resolve,reject) => {
-        var repertory = new Repertory(repertoryList);
+        const repertory = new Repertory(repertoryList);
         repertory.save().then((data) => {
           resolve(data);
         }).catch(err => {

@@ -20,7 +20,7 @@ export default {
   async addAttribute (attributeList: Array<Object>) {
     try {
       return await new Promise((resolve,reject) => {
-        var attributes = new Attribute(attributeList);
+        const attributes = new Attribute(attributeList);
         attributes.save().then((data) => {
           resolve(data);
         }).catch(err => {
@@ -36,7 +36,7 @@ export default {
   async addAttributeValue (attributeValueList: Array<Object>) {
     try {
       return await new Promise((resolve,reject) => {
-        var attributeValue = new AttributeValue(attributeValueList);
+        const attributeValue = new AttributeValue(attributeValueList);
         attributeValue.save().then((data) => {
           resolve(data);
         }).catch(() => {
