@@ -48,8 +48,8 @@ export default {
       } else {
         const password = md5.createHash(req.body.password);
         if (result.password === password && result.role === 'R') {
-          var content = { name: req.body.loginName };
-          var token = Token.createToken(content);
+          const content = { name: req.body.loginName };
+          const token = Token.createToken(content);
           console.log(chalk.green('Token create success: ' + token));
           res.status(200).send({
             code: 0,
@@ -76,8 +76,8 @@ export default {
       } else {
         const password = md5.createHash(req.body.password);
         if (result.password === password && result.role !== 'R') {
-          var content = { name: req.body.loginName };
-          var token = Token.createToken(content);
+          const content = { name: req.body.loginName };
+          const token = Token.createToken(content);
           console.log(chalk.green('Token create success: ' + token));
           res.status(200).send({
             code: 0,

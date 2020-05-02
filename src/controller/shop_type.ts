@@ -1,4 +1,4 @@
-var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 import chalk from 'chalk';
 import shopTypeService from '../service/shop_type';
 // 商品类型相关接口

@@ -4,7 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import indexRouter from './routes/index';
+import indexRouter from './src/routes/index';
 
 let app = express();
 

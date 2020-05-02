@@ -1,5 +1,5 @@
 import attributeService from '../service/attriubte';
-var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 
 //属性信息相关接口
 export default {

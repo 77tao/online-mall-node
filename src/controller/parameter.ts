@@ -1,4 +1,4 @@
-var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 import parameterService from '../service/parameter';
 import chalk from 'chalk';
 import { type } from 'os';
