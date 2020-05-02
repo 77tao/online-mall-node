@@ -22,14 +22,14 @@ export default {
       site: site,
       cost: cost
     };
-    let shopResult = await shopService.addShop(shopList);
+    let shopResult: any = await shopService.addShop(shopList);
     let shop_id = shopResult._id;
     for (let value of attributeTableList) {
       const repertoryList = {
         repertory: value.repertory,
         repertoryWarn: value.repertoryWarn
       };
-      let repertroyResult = await repertroyService.addRepertory(repertoryList);
+      let repertroyResult: any = await repertroyService.addRepertory(repertoryList);
       const skuList = {
         repertory_id: repertroyResult._id,
         price: value.price,

@@ -7,16 +7,7 @@ export default {
   async addAttribute (req, res) {
     try {
       let { typeId, enter, name, key, multiple, status, news, attribute } = req.body;
-      interface attributeInterface {
-        typeId: String,
-        enter: String,
-        name: String,
-        multiple: String,
-        status: String,
-        news: String,
-        key: String
-      }
-      let attributeList: attributeInterface = {
+      let attributeList: any = {
         typeId: typeId,
         enter: enter,
         name: name,
@@ -27,10 +18,10 @@ export default {
       };
       let result = await attributeService.isAttributeName(name,typeId);
       if (result == null) {
-        const attributeResult = await attributeService.addAttribute(attributeList);
+        const attributeResult: any = await attributeService.addAttribute(attributeList);
         let attribute_id = attributeResult.id;
         for (let index of attribute) {
-          let attributeValueList: Object = {
+          let attributeValueList: any = {
             attribute_value: index,
             attribute_id: attribute_id
           };
@@ -97,7 +88,7 @@ export default {
           status: attributeResult[0].status,
           news: attributeResult[0].news,
         };
-        const attributeValueResult = await attributeService.getAttributeValue(attributeResult[0]._id);
+        const attributeValueResult: any = await attributeService.getAttributeValue(attributeResult[0]._id);
         let arr: Array<Object> = [];
         let idArr: Array<String> = [];
         attributeValueResult.forEach(index => {
@@ -121,7 +112,7 @@ export default {
     try {
       let { typeId } = req.query;
       let attributeData = [];
-      const attributeList = await attributeService.getAttributeType(typeId);
+      const attributeList: any = await attributeService.getAttributeType(typeId);
       for (let value of attributeList) {
         let obj: Object = {
           _id: value._id,
@@ -135,7 +126,7 @@ export default {
           attributeValueId: null
         };
         const attribute_id = value._id;
-        const attributeValueList = await attributeService.getAttributeValue(attribute_id);
+        const attributeValueList: any = await attributeService.getAttributeValue(attribute_id);
         let arr = [];
         let idArr = [];
         attributeValueList.forEach(index => {
