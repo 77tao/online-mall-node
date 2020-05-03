@@ -84,7 +84,7 @@ export default {
   async getUserList() {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne().then(data => {
+        User.find().then(data => {
           resolve(data);
         }).catch(err => {
           reject(err);

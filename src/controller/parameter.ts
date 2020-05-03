@@ -8,7 +8,7 @@ export default {
   async addParameter(req, res) {
     try {
       let { name } = req.body
-      let result = parameterService.isParameterName(name);
+      let result = await parameterService.isParameterName(name);
       if (result == null) {
         await parameterService.addParameter(req.body);
         console.log(chalk.green('parameter create success !'));
@@ -31,7 +31,7 @@ export default {
   async updateParameter(req, res) {
     try {
       let { id } = req.body;
-      let result = parameterService.isParameterId(id);
+      let result = await parameterService.isParameterId(id);
       if (result == null) {
         res.status(200).send({
           code: 1,
@@ -55,7 +55,7 @@ export default {
   async getParameter(req, res) {
     try {
       let { id } = req.query;
-      let result = parameterService.isParameterId(id);
+      let result = await parameterService.isParameterId(id);
       if (result != null) {
         let data = parameterService.getParameterId(id);
         res.status(200).send({
@@ -72,7 +72,7 @@ export default {
   async getParameterList(req, res) {
     try {
       const typeId = req.query.typeId;
-      let data = parameterService.getParameterTypeList(typeId);
+      let data = await parameterService.getParameterTypeList(typeId);
       res.status(200).send({
         code: 0,
         data: data
@@ -86,7 +86,7 @@ export default {
   async removeParameter(req, res) {
     try {
       let { id } = req.body;
-      let result = parameterService.isParameterId(id);
+      let result = await parameterService.isParameterId(id);
       if (result == null) {
         res.status(200).send({
           code: 1,

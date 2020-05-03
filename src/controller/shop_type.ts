@@ -8,7 +8,7 @@ export default {
     try {
       // 验证类型名称是否存在
       let { name } = req.body
-      let result = shopTypeService.isShopTypeName(name);
+      let result = await shopTypeService.isShopTypeName(name);
       if (result == null) {
         await shopTypeService.addShopType(req.body);
         console.log(chalk.green('shopType create success !'));

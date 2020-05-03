@@ -12,4 +12,4 @@ db.once('open', () => {
   console.log(chalk.green(' success connection to ' + url));
 });
 
-module.exports = mongoose;
+export default mongoose;

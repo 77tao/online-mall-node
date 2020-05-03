@@ -12,7 +12,7 @@ export default {
     try {
       // 验证用户是否存在
       let { email } = req.body
-      let result = userService.isUserEmail(email);
+      let result = await userService.isUserEmail(email);
       if (result == null) {
         let data: any = await userService.addUser(req.body);
         console.log(chalk.green('User create success !'));
@@ -39,7 +39,7 @@ export default {
   // 登录
   async login(req, res) {
     try {
-      let result: any = userService.isUserEmail(req.body.loginName);
+      let result: any = await userService.isUserEmail(req.body.loginName);
       if (result == null) {
         res.status(200).send({
           code: 1,
@@ -67,7 +67,7 @@ export default {
   // 内部登录
   async internalLogin(req, res) {
     try {
-      let result: any = userService.isUserEmail(req.body.loginName);
+      let result: any = await userService.isUserEmail(req.body.loginName);
       if (result == null) {
         res.status(200).send({
           code: 1,
