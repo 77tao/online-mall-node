@@ -2,7 +2,7 @@ import axios from 'axios';
 import userService from '../service/user';
 import Token from '../middleware/token';
 import md5 from '../middleware/md5';
-import util from '../util/index';
+import { createRandom } from "../util/index";
 import chalk from 'chalk';
 const clientID = '89420a1175447090c216';
 const clientSecret = '2d8bd797aed3c83631cc27cb5e53b2ccfc3bf41a';
@@ -125,7 +125,7 @@ export default {
       let result = await userService.isUserId(request.data.id);
 
       if (result == null) {
-        const randomNum = util.createRandom(8, 15); //生成随机数
+        const randomNum = createRandom(8, 15); //生成随机数
         const password = md5.createHash(randomNum); //生成随机密码
         //保存第三方数据到数据库
         let outhData = {

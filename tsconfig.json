@@ -9,12 +9,10 @@
     "outDir": "./build",
     "esModuleInterop": true,
     "declaration": true,
-    "watch": true,
   },
-  "include": [
-    "*.ts"
-  ],
   "exclude": [
-    "public"
+    "node_modules",
+    "public",
+    "build"
   ]
 }

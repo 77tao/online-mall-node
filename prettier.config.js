@@ -1,4 +1,4 @@
-module.exports = {
+module.export = {
   // 一行最多 100 字符
   printWidth: 100,
   // 使用 4 个空格缩进
