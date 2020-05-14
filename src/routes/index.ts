@@ -89,6 +89,10 @@ router.post("/removeParameter", token.checkToken, parameter.removeParameter);
 
 router.post("/addStore", token.checkToken, store.addStore);
 
+router.post("/updateStore", token.checkToken, store.updateStore);
+
+router.get('/getStore', token.checkToken, store.getStore);
+
 router.get("/getStoreList", token.checkToken, store.getStoreList);
 
 router.get('/getCarousel', carousel.getCarousel);

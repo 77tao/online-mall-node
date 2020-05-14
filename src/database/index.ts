@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import chalk from 'chalk';
-const url = 'mongodb://localhost:27017/mall-test';
+const url = 'mongodb://zjr:123456@localhost:27017/mall-test?authSource=admin';
 
 mongoose.connect(url, { useNewUrlParser: true });
 
