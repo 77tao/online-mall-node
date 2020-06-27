@@ -20,7 +20,7 @@ let router = express.Router();
 let brandAddress = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, '../public/image/brand/'));
+      cb(null, path.join('public/image/brand/'));
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname);
@@ -31,7 +31,7 @@ let brandAddress = multer({
 let commodityAddress = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, '../public/image/commidity/'));
+      cb(null, path.join('public/image/commidity/'));
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname);
@@ -59,13 +59,21 @@ router.put('/updateShopTypeStatus', token.checkToken, shop_type.updateShopTypeSt
 
 router.post('/uploadbrandLogo', brandAddress.single('file'), upload.uploadbrandLogo);
 
-router.post('/uploadCommodityImage', commodityAddress.single('file'), upload.uploadCommodityImage);
+router.post('/uploadCommodityImage', token.checkToken, commodityAddress.single('file'), upload.uploadCommodityImage);
 
 router.post('/addBrand', token.checkToken, brand.addBrand);
 
+router.post('/editBrand', token.checkToken, brand.editBrand);
+
 router.get('/getBrandList', token.checkToken, brand.getBrandList);
 
-router.get("/getTypeBrandList", token.checkToken, brand.getTypeBrandList);
+router.get('/getTypeBrandList', token.checkToken, brand.getTypeBrandList);
+
+router.get('/getBrand', token.checkToken, brand.getBrand);
+
+router.post('/removeBrandPic', token.checkToken, brand.removeBrandPic);
+
+router.post('/removeBrand', token.checkToken, brand.removeBrand);
 
 router.post('/addAttribute', token.checkToken, attribute.addAttribute);
 

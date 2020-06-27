@@ -1,17 +1,17 @@
 import mongoose from 'mongoose';
 
-const brand_entity = new mongoose.Schema({
-  name: { //品牌名称
+const brand_pic_entity = new mongoose.Schema({
+  name: { // 图片名称
+    required: true,
+    type: String,
+  },
+  path: { // 图片路径
     required: true,
     type: String
   },
-  type: { //所属分类
+  brand_id: { // 品牌id
     required: true,
-    type: Array
-  },
-  status: { // 品牌状态 0-未审核 1-审核中 2审核通过 3审核未通过 （保留字段 暂时不做审核相关功能  暂时状态都为2）
-    require: true,
-    type: Number
+    type: String
   },
   create_time: { // 创建时间
     required: true,
@@ -28,6 +28,6 @@ const brand_entity = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-const brand = mongoose.model('brand', brand_entity, 'brand');
+const brand_pic = mongoose.model('brand_pic', brand_pic_entity, 'brand_pic');
 
-export default brand
+export default brand_pic
