@@ -1,17 +1,18 @@
-import Brand from '../database/modules/brand';
-import BrandPic from '../database/modules/brand_pic';
+import Brand from "../database/modules/brand";
+import BrandPic from "../database/modules/brand_pic";
 
 export default {
-
   // 判断是否已存在
   async isBrandName(name) {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.findOne({ 'name': name }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        Brand.findOne({ name: name })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -22,11 +23,13 @@ export default {
   async isBrandPicId(id) {
     try {
       return await new Promise((resolve, reject) => {
-        BrandPic.findOne({ _id: id }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        BrandPic.findOne({ _id: id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -34,15 +37,18 @@ export default {
   },
 
   // 添加品牌
-  async addBrand(brandList: Array<Object>) {
+  async addBrand(brandList) {
     try {
       return await new Promise((resolve, reject) => {
         const brand = new Brand(brandList);
-        brand.save().then((data) => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        })
+        brand
+          .save()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -53,9 +59,13 @@ export default {
   async getBrandList() {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.find().then(data => {
-          resolve(data);
-        })
+        Brand.find()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -66,9 +76,13 @@ export default {
   async getTypeBrandList(typeId) {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.find({ "type": typeId }).then(data => {
-          resolve(data);
-        })
+        Brand.find({ type: typeId })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -79,9 +93,13 @@ export default {
   async getBrand(id) {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.findOne({ '_id': id }).then(data => {
-          resolve(data);
-        })
+        Brand.findOne({ _id: id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -89,15 +107,18 @@ export default {
   },
 
   // 添加品牌图片
-  async addBrandPic(picList: Array<Object>) {
+  async addBrandPic(picList) {
     try {
       return await new Promise((resolve, reject) => {
         const brandPic = new BrandPic(picList);
-        brandPic.save().then((data) => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        })
+        brandPic
+          .save()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -108,9 +129,13 @@ export default {
   async getBrandPicList() {
     try {
       return await new Promise((resolve, reject) => {
-        BrandPic.find().then(data => {
-          resolve(data);
-        })
+        BrandPic.find()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -121,9 +146,13 @@ export default {
   async getIdBrandPicList(brand_id) {
     try {
       return await new Promise((resolve, reject) => {
-        BrandPic.find({ 'brand_id': brand_id }).then(data => {
-          resolve(data);
-        })
+        BrandPic.find({ brand_id: brand_id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -134,11 +163,13 @@ export default {
   async updateBrand(condition, brandData) {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.updateOne(condition, brandData).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        Brand.updateOne(condition, brandData)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -149,11 +180,13 @@ export default {
   async removeBrandPic(id) {
     try {
       return await new Promise((resolve, reject) => {
-        BrandPic.deleteOne({ '_id': id }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        BrandPic.deleteOne({ _id: id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -164,14 +197,16 @@ export default {
   async removeBrand(id) {
     try {
       return await new Promise((resolve, reject) => {
-        Brand.deleteOne({ '_id': id }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        Brand.deleteOne({ _id: id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
     }
-  }
-}
+  },
+};

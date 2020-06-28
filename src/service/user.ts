@@ -1,16 +1,18 @@
-import User from '../database/modules/user';
-import md5 from '../middleware/md5';
+import User from "../database/modules/user";
+import md5 from "../middleware/md5";
 
 export default {
   // 验证邮箱是否存在
   async isUserEmail(email) {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne({ 'email': email }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        User.findOne({ email: email })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -21,11 +23,13 @@ export default {
   async isUserId(id) {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne({ 'openid': id }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        User.findOne({ openid: id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -40,11 +44,14 @@ export default {
         const hash = md5.createHash(user.password);
         user.password = hash;
         user.role = "R";
-        user.save().then((data) => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        })
+        user
+          .save()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -54,11 +61,13 @@ export default {
   async updateUser(id, outhData) {
     try {
       return await new Promise((resolve, reject) => {
-        User.updateOne({ 'openid': id }, outhData).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        User.updateOne({ openid: id }, outhData)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -69,11 +78,13 @@ export default {
   async getUserInfo(id) {
     try {
       return await new Promise((resolve, reject) => {
-        User.findOne({ '_id': id }).then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        User.findOne({ _id: id })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -84,14 +95,16 @@ export default {
   async getUserList() {
     try {
       return await new Promise((resolve, reject) => {
-        User.find().then(data => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        });
+        User.find()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
     }
-  }
-}
+  },
+};

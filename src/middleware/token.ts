@@ -1,13 +1,12 @@
-import jwt from 'jsonwebtoken';
-const secretOrPrivateKey = 'exclusive';
+import jwt from "jsonwebtoken";
+const secretOrPrivateKey = "exclusive";
 export default {
-
   // 创建token
   createToken(content) {
-    let token = jwt.sign(content, secretOrPrivateKey, {
-      expiresIn: '7d'
-    })
-    return token
+    const token = jwt.sign(content, secretOrPrivateKey, {
+      expiresIn: "7d",
+    });
+    return token;
   },
 
   // 检查token
@@ -18,6 +17,6 @@ export default {
       } else {
         next();
       }
-    })
-  }
-}
+    });
+  },
+};

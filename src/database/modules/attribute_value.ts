@@ -1,15 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const attribute_value_entity = new mongoose.Schema({
-  attribute_value: { //属性值名称
+  attribute_value: {
+    //属性值名称
     required: true,
-    type: String
+    type: String,
   },
-  attribute_id: { // 属性id
+  attribute_id: {
+    // 属性id
     required: true,
-    type: String
-  }
-})
+    type: String,
+  },
+});
 
 /**
  * model 有4个参数
@@ -19,6 +21,10 @@ const attribute_value_entity = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-const attribute_value = mongoose.model('attribute_value', attribute_value_entity, 'attribute_value');
+const attribute_value = mongoose.model(
+  "attribute_value",
+  attribute_value_entity,
+  "attribute_value"
+);
 
-export default attribute_value
+export default attribute_value;

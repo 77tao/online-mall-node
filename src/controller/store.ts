@@ -1,13 +1,12 @@
-import storeService from '../service/store';
-const ObjectId = require('mongodb').ObjectId;
-
+import storeService from "../service/store";
+const ObjectId = require("mongodb").ObjectId;
 
 export default {
   // 添加店铺
   async addStore(req, res) {
     try {
-      let { name, typeId } = req.body;
-      let result = await storeService.isStoreName(name, typeId);
+      const { name, typeId } = req.body;
+      const result = await storeService.isStoreName(name, typeId);
       if (result == null) {
         await storeService.addStore(req.body);
         res.status(200).send({
@@ -28,7 +27,7 @@ export default {
   // 获取店铺列表
   async getStoreList(req, res) {
     try {
-      let result = await storeService.getStoreList();
+      const result = await storeService.getStoreList();
       if (result) {
         res.status(200).send({
           code: 0,
@@ -39,7 +38,7 @@ export default {
           code: 1,
           message: "获取失败",
         });
-      };
+      }
     } catch (err) {
       console.log(err);
     }
@@ -48,8 +47,8 @@ export default {
   // 根据商铺id获取商铺信息
   async getStore(req, res) {
     try {
-      let { id } = req.query;
-      let result = await storeService.getStore(id);
+      const { id } = req.query;
+      const result = await storeService.getStore(id);
       if (result) {
         res.status(200).send({
           code: 0,
@@ -61,27 +60,25 @@ export default {
           message: "该商铺不存在",
         });
       }
-    } catch (err) {
-
-    }
+    } catch (err) {}
   },
 
   // 修改商铺信息
   async updateStore(req, res) {
     try {
-      let { id, name, type, status } = req.body;
-      let result = await storeService.isStoreId(id);
+      const { id, name, type, status } = req.body;
+      const result = await storeService.isStoreId(id);
       if (result) {
-        let obj = {
+        const obj = {
           name: name,
           type: type,
-          status: status
-        }
-        let condition = { _id: ObjectId(id) };
+          status: status,
+        };
+        const condition = { _id: ObjectId(id) };
         await storeService.updateStore(condition, obj);
         res.status(200).send({
           code: 0,
-          message: '修改成功',
+          message: "修改成功",
         });
       } else {
         res.status(200).send({
@@ -92,5 +89,5 @@ export default {
     } catch (err) {
       console.log(err);
     }
-  }
-}
+  },
+};

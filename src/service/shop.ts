@@ -1,6 +1,5 @@
-
-import Shop from '../database/modules/shop';
-import Sku from '../database/modules/sku';
+import Shop from "../database/modules/shop";
+import Sku from "../database/modules/sku";
 
 export default {
   // 添加商品
@@ -8,11 +7,14 @@ export default {
     try {
       return await new Promise((resolve, reject) => {
         const shop = new Shop(shopList);
-        shop.save().then((data) => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        })
+        shop
+          .save()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
@@ -24,11 +26,14 @@ export default {
     try {
       return await new Promise((resolve, reject) => {
         const sku = new Sku(skuList);
-        sku.save().then((data) => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        })
+        sku
+          .save()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);

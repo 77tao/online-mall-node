@@ -1,4 +1,4 @@
-import Repertory from '../database/modules/repertory';
+import Repertory from "../database/modules/repertory";
 
 export default {
   // 添加库存信息
@@ -6,14 +6,17 @@ export default {
     try {
       return await new Promise((resolve, reject) => {
         const repertory = new Repertory(repertoryList);
-        repertory.save().then((data) => {
-          resolve(data);
-        }).catch(err => {
-          reject(err);
-        })
+        repertory
+          .save()
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       });
     } catch (err) {
       console.log(err);
     }
-  }
-}
+  },
+};

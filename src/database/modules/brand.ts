@@ -1,24 +1,28 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const brand_entity = new mongoose.Schema({
-  name: { //品牌名称
+  name: {
+    //品牌名称
     required: true,
-    type: String
+    type: String,
   },
-  type: { //所属分类
+  type: {
+    //所属分类
     required: true,
-    type: Array
+    type: Array,
   },
-  status: { // 品牌状态 0-未审核 1-审核中 2审核通过 3审核未通过 （保留字段 暂时不做审核相关功能  暂时状态都为2）
+  status: {
+    // 品牌状态 0-未审核 1-审核中 2审核通过 3审核未通过 （保留字段 暂时不做审核相关功能  暂时状态都为2）
     require: true,
-    type: Number
+    type: Number,
   },
-  create_time: { // 创建时间
+  create_time: {
+    // 创建时间
     required: true,
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 
 /**
  * model 有4个参数
@@ -28,6 +32,6 @@ const brand_entity = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-const brand = mongoose.model('brand', brand_entity, 'brand');
+const brand = mongoose.model("brand", brand_entity, "brand");
 
-export default brand
+export default brand;

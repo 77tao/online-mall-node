@@ -5,7 +5,7 @@ export default {
     try {
       res.status(200).send({
         code: 0,
-        data: req.file
+        data: req.file,
       });
     } catch (err) {
       res.status(400);
@@ -17,10 +17,10 @@ export default {
     try {
       res.status(200).send({
         code: 0,
-        data: req.file
+        data: req.file,
       });
     } catch (err) {
       res.status(400);
     }
   },
-}
+};

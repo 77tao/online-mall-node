@@ -1,69 +1,84 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const shop_entity = new mongoose.Schema({
-  name: { //商品名称
+  name: {
+    //商品名称
     required: true,
-    type: String
+    type: String,
   },
-  type: { //商品类型
+  type: {
+    //商品类型
     required: true,
-    type: Array
+    type: Array,
   },
-  title: { //商品标题
+  title: {
+    //商品标题
     required: true,
-    type: String
+    type: String,
   },
-  pictureList: { // 商品图片
+  pictureList: {
+    // 商品图片
     required: true,
-    type: Array
+    type: Array,
   },
-  status: { //商品状态
+  status: {
+    //商品状态
     required: true,
-    type: Number
+    type: Number,
   },
-  brand: { //商品品牌
+  brand: {
+    //商品品牌
     required: true,
-    type: String
+    type: String,
   },
-  content: { //商品介绍
+  content: {
+    //商品介绍
     required: true,
-    type: String
+    type: String,
   },
-  attribute_list: { //商品属性
+  attribute_list: {
+    //商品属性
     required: true,
-    type: Array
+    type: Array,
   },
-  parameter_list: { // 商品参数
+  parameter_list: {
+    // 商品参数
     required: true,
-    type: Array
+    type: Array,
   },
-  presell: { // 预售
+  presell: {
+    // 预售
     required: true,
-    type: Boolean
+    type: Boolean,
   },
-  server_guarantees: { //服务保证
+  server_guarantees: {
+    //服务保证
     required: true,
-    type: Array
+    type: Array,
   },
-  site: { // 发货地
+  site: {
+    // 发货地
     required: true,
-    type: Array
+    type: Array,
   },
-  cost: { // 运费
+  cost: {
+    // 运费
     required: true,
-    type: Number
+    type: Number,
   },
-  create_time: { // 创建时间
+  create_time: {
+    // 创建时间
     required: true,
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  update_time: { // 修改时间
+  update_time: {
+    // 修改时间
     required: true,
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 
 /**
  * model 有4个参数
@@ -73,6 +88,6 @@ const shop_entity = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-const shop = mongoose.model('shop', shop_entity, 'shop');
+const shop = mongoose.model("shop", shop_entity, "shop");
 
-export default shop
+export default shop;

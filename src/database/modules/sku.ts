@@ -1,37 +1,44 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const sku_entity = new mongoose.Schema({
-  skuNo: { // sku编号
+  skuNo: {
+    // sku编号
     required: true,
-    type: String
+    type: String,
   },
-  shop_id: { // 商品id
+  shop_id: {
+    // 商品id
     required: true,
-    type: String
+    type: String,
   },
-  repertory_id: { // 仓库id
+  repertory_id: {
+    // 仓库id
     required: true,
-    type: String
+    type: String,
   },
-  attribute_value: { // 属性值id
+  attribute_value: {
+    // 属性值id
     required: true,
-    type: Array
+    type: Array,
   },
-  price: { // 商品价格
+  price: {
+    // 商品价格
     required: true,
-    type: Number
+    type: Number,
   },
-  create_time: { // 创建时间
+  create_time: {
+    // 创建时间
     required: true,
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  update_time: { // 修改时间
+  update_time: {
+    // 修改时间
     required: true,
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 
 /**
  * model 有4个参数
@@ -41,6 +48,6 @@ const sku_entity = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-const sku = mongoose.model('sku', sku_entity, 'sku');
+const sku = mongoose.model("sku", sku_entity, "sku");
 
-export default sku
+export default sku;

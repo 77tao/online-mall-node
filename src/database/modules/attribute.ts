@@ -1,45 +1,54 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const attribute_entity = new mongoose.Schema({
-  name: { //属性名称
+  name: {
+    //属性名称
     required: true,
-    type: String
+    type: String,
   },
-  key: { //属性key
+  key: {
+    //属性key
     required: true,
-    type: String
+    type: String,
   },
-  enter: { //属性录入方式
+  enter: {
+    //属性录入方式
     required: true,
-    type: String
+    type: String,
   },
-  typeId: { // 类型id
+  typeId: {
+    // 类型id
     required: true,
-    type: String
+    type: String,
   },
-  multiple: { // 是否支持多选
+  multiple: {
+    // 是否支持多选
     required: true,
-    type: Boolean
+    type: Boolean,
   },
-  status: { // 是否开启该属性
+  status: {
+    // 是否开启该属性
     required: true,
-    type: Boolean
+    type: Boolean,
   },
-  news: { // 是否支持新增
+  news: {
+    // 是否支持新增
     required: true,
-    type: Boolean
+    type: Boolean,
   },
-  create_time: { // 创建时间
+  create_time: {
+    // 创建时间
     required: true,
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  update_time: { // 修改时间
+  update_time: {
+    // 修改时间
     required: true,
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 
 /**
  * model 有4个参数
@@ -49,6 +58,6 @@ const attribute_entity = new mongoose.Schema({
  * skipInit 是否跳过初始化，默认为false
  * 当collection缺失时，该方法会将name参数根据一定的规则转换成Mongodb中的collection的名称
  */
-const attribute = mongoose.model('attribute', attribute_entity, 'attribute');
+const attribute = mongoose.model("attribute", attribute_entity, "attribute");
 
-export default attribute
+export default attribute;

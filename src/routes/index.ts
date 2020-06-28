@@ -1,93 +1,114 @@
-import express from 'express';
-import path from 'path';
-import multer from 'multer';
-import channel from '../controller/channel';
-import attribute from '../controller/attribute';
-import user from '../controller/user';
-import carousel from '../controller/carousel';
-import news from '../controller/news';
-import shop from '../controller/shop';
-import order from '../controller/order';
-import token from '../middleware/token';
-import shop_type from '../controller/shop_type';
-import brand from '../controller/brand';
-import upload from '../controller/upload';
-import parameter from '../controller/parameter';
-import store from '../controller/store';
+import express from "express";
+import path from "path";
+import multer from "multer";
+import channel from "../controller/channel";
+import attribute from "../controller/attribute";
+import user from "../controller/user";
+import carousel from "../controller/carousel";
+import news from "../controller/news";
+import shop from "../controller/shop";
+import order from "../controller/order";
+import token from "../middleware/token";
+import shop_type from "../controller/shop_type";
+import brand from "../controller/brand";
+import upload from "../controller/upload";
+import parameter from "../controller/parameter";
+import store from "../controller/store";
 
-let router = express.Router();
+const router = express.Router();
 
-let brandAddress = multer({
+const brandAddress = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join('public/image/brand/'));
+      cb(null, path.join("public/image/brand/"));
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname);
-    }
-  })
-})
+      cb(null, Date.now() + "-" + file.originalname);
+    },
+  }),
+});
 
-let commodityAddress = multer({
+const commodityAddress = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join('public/image/commidity/'));
+      cb(null, path.join("public/image/commidity/"));
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname);
-    }
-  })
-})
+      cb(null, Date.now() + "-" + file.originalname);
+    },
+  }),
+});
 
-router.post('/register', user.register);
+router.post("/register", user.register);
 
-router.post('/login', user.login);
+router.post("/login", user.login);
 
 router.post("/login/internal", user.internalLogin);
 
-router.get('/userInfo', token.checkToken, user.userInfo);
+router.get("/userInfo", token.checkToken, user.userInfo);
 
-router.get('/oauth/redirect', user.oauth);
+router.get("/oauth/redirect", user.oauth);
 
-router.get('/getUserList', token.checkToken, user.getUserList)
+router.get("/getUserList", token.checkToken, user.getUserList);
 
-router.post('/addShopType', token.checkToken, shop_type.addShopType);
+router.post("/addShopType", token.checkToken, shop_type.addShopType);
 
-router.get('/getAllShopTypeList', token.checkToken, shop_type.getAllShopTypeList);
+router.get(
+  "/getAllShopTypeList",
+  token.checkToken,
+  shop_type.getAllShopTypeList
+);
 
-router.put('/updateShopTypeStatus', token.checkToken, shop_type.updateShopTypeStatus);
+router.put(
+  "/updateShopTypeStatus",
+  token.checkToken,
+  shop_type.updateShopTypeStatus
+);
 
-router.post('/uploadbrandLogo', brandAddress.single('file'), upload.uploadbrandLogo);
+router.post(
+  "/uploadbrandLogo",
+  brandAddress.single("file"),
+  upload.uploadbrandLogo
+);
 
-router.post('/uploadCommodityImage', token.checkToken, commodityAddress.single('file'), upload.uploadCommodityImage);
+router.post(
+  "/uploadCommodityImage",
+  token.checkToken,
+  commodityAddress.single("file"),
+  upload.uploadCommodityImage
+);
 
-router.post('/addBrand', token.checkToken, brand.addBrand);
+router.post("/addBrand", token.checkToken, brand.addBrand);
 
-router.post('/editBrand', token.checkToken, brand.editBrand);
+router.post("/editBrand", token.checkToken, brand.editBrand);
 
-router.get('/getBrandList', token.checkToken, brand.getBrandList);
+router.get("/getBrandList", token.checkToken, brand.getBrandList);
 
-router.get('/getTypeBrandList', token.checkToken, brand.getTypeBrandList);
+router.get("/getTypeBrandList", token.checkToken, brand.getTypeBrandList);
 
-router.get('/getBrand', token.checkToken, brand.getBrand);
+router.get("/getBrand", token.checkToken, brand.getBrand);
 
-router.post('/removeBrandPic', token.checkToken, brand.removeBrandPic);
+router.post("/removeBrandPic", token.checkToken, brand.removeBrandPic);
 
-router.post('/removeBrand', token.checkToken, brand.removeBrand);
+router.post("/removeBrand", token.checkToken, brand.removeBrand);
 
-router.post('/addAttribute', token.checkToken, attribute.addAttribute);
+router.post("/addAttribute", token.checkToken, attribute.addAttribute);
 
-router.get('/getAttribute', token.checkToken, attribute.getAttribute);
+router.get("/getAttribute", token.checkToken, attribute.getAttribute);
 
-router.post('/updateAttribute', token.checkToken, attribute.updateAttribte);
+router.post("/updateAttribute", token.checkToken, attribute.updateAttribte);
 
 router.post("/removeAttribute", token.checkToken, attribute.removeAttribute);
 
-router.get("/getTypeAttributeList", token.checkToken, attribute.getTypeAttributeList);
+router.get(
+  "/getTypeAttributeList",
+  token.checkToken,
+  attribute.getTypeAttributeList
+);
 
-router.post('/addParameter', token.checkToken, parameter.addParameter);
+router.post("/addParameter", token.checkToken, parameter.addParameter);
 
-router.get('/getParameterList', token.checkToken, parameter.getParameterList);
+router.get("/getParameterList", token.checkToken, parameter.getParameterList);
 
 router.get("/getParameter", token.checkToken, parameter.getParameter);
 
@@ -99,22 +120,22 @@ router.post("/addStore", token.checkToken, store.addStore);
 
 router.post("/updateStore", token.checkToken, store.updateStore);
 
-router.get('/getStore', token.checkToken, store.getStore);
+router.get("/getStore", token.checkToken, store.getStore);
 
 router.get("/getStoreList", token.checkToken, store.getStoreList);
 
-router.get('/getCarousel', carousel.getCarousel);
+router.get("/getCarousel", carousel.getCarousel);
 
-router.get('/getNews', news.getNews);
+router.get("/getNews", news.getNews);
 
-router.post('/addShopping', shop.addShopping);
+router.post("/addShopping", shop.addShopping);
 
-router.get('/getSeckillShopping', shop.getSeckillShopping);
+router.get("/getSeckillShopping", shop.getSeckillShopping);
 
-router.get('/getTrolleyShopping', shop.getTrolleyShopping);
+router.get("/getTrolleyShopping", shop.getTrolleyShopping);
 
-router.get('/getChannelType', channel.getChannelType);
+router.get("/getChannelType", channel.getChannelType);
 
-router.get('/getOrder', token.checkToken, order.getOrder);
+router.get("/getOrder", token.checkToken, order.getOrder);
 
 export default router;

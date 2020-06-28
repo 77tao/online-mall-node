@@ -1,35 +1,46 @@
-import attributeService from '../service/attriubte';
-const ObjectId = require('mongodb').ObjectId;
+import attributeService from "../service/attriubte";
+const ObjectId = require("mongodb").ObjectId;
 
 //属性信息相关接口
 export default {
   // 添加属性信息
   async addAttribute(req, res) {
     try {
-      let { typeId, enter, name, key, multiple, status, news, attribute } = req.body;
-      let attributeList: any = {
+      const {
+        typeId,
+        enter,
+        name,
+        key,
+        multiple,
+        status,
+        news,
+        attribute,
+      } = req.body;
+      const attributeList: any = {
         typeId: typeId,
         enter: enter,
         name: name,
         multiple: multiple,
         status: status,
         news: news,
-        key: key
+        key: key,
       };
-      let result = await attributeService.isAttributeName(name, typeId);
+      const result = await attributeService.isAttributeName(name, typeId);
       if (result == null) {
-        const attributeResult: any = await attributeService.addAttribute(attributeList);
-        let attribute_id = attributeResult.id;
-        for (let index of attribute) {
-          let attributeValueList: any = {
+        const attributeResult: any = await attributeService.addAttribute(
+          attributeList
+        );
+        const attribute_id = attributeResult.id;
+        for (const index of attribute) {
+          const attributeValueList: any = {
             attribute_value: index,
-            attribute_id: attribute_id
+            attribute_id: attribute_id,
           };
           await attributeService.addAttributeValue(attributeValueList);
-        };
+        }
         res.status(200).send({
           code: 0,
-          message: '添加成功',
+          message: "添加成功",
         });
       } else {
         res.status(200).send({
@@ -45,26 +56,38 @@ export default {
   // 修改属性信息
   async updateAttribte(req, res) {
     try {
-      let { id, enter, name, key, multiple, status, news, attribute, attributeValueId } = req.body;
+      const {
+        id,
+        enter,
+        name,
+        key,
+        multiple,
+        status,
+        news,
+        attribute,
+        attributeValueId,
+      } = req.body;
       const result = await attributeService.isAttribute(id);
       if (result) {
-        let obj: object = {
+        const obj: object = {
           enter: enter,
           name: name,
           key: key,
           multiple: multiple,
           status: status,
-          news: news
+          news: news,
         };
-        let condition = { _id: ObjectId(id) };
+        const condition = { _id: ObjectId(id) };
         await attributeService.updateAttribute(condition, obj);
         for (let i = 0; i < attributeValueId.length; i++) {
-          let condition = { _id: ObjectId(attributeValueId[i]) };
-          await attributeService.updateAttributeValue(condition, { attribute_value: attribute[i] });
-        };
+          const condition = { _id: ObjectId(attributeValueId[i]) };
+          await attributeService.updateAttributeValue(condition, {
+            attribute_value: attribute[i],
+          });
+        }
         res.status(200).send({
           code: 0,
-          message: '修改成功',
+          message: "修改成功",
         });
       }
     } catch (err) {
@@ -75,11 +98,11 @@ export default {
   //根据属性id查询某条属性
   async getAttribute(req, res) {
     try {
-      let { id } = req.query;
+      const { id } = req.query;
       const result = await attributeService.isAttribute(id);
       if (result) {
         const attributeResult = await attributeService.getAttribute(id);
-        const obj: Object = {
+        const obj: Record<string, any> = {
           _id: attributeResult[0]._id,
           key: attributeResult[0].key,
           enter: attributeResult[0].enter,
@@ -88,20 +111,22 @@ export default {
           status: attributeResult[0].status,
           news: attributeResult[0].news,
         };
-        const attributeValueResult: any = await attributeService.getAttributeValue(attributeResult[0]._id);
-        let arr: Array<Object> = [];
-        let idArr: Array<String> = [];
-        attributeValueResult.forEach(index => {
+        const attributeValueResult: any = await attributeService.getAttributeValue(
+          attributeResult[0]._id
+        );
+        const arr: Array<string> = [];
+        const idArr: Array<string> = [];
+        attributeValueResult.forEach((index) => {
           arr.push(index.attribute_value);
           idArr.push(index._id);
         });
-        obj['attribute'] = arr;
-        obj['attributeValueId'] = idArr;
+        obj.attribute = arr;
+        obj.attributeValueId = idArr;
         res.status(200).send({
           code: 0,
-          data: obj
+          data: obj,
         });
-      };
+      }
     } catch (err) {
       console.log(err);
     }
@@ -110,11 +135,13 @@ export default {
   // 根据类型获取属性列表
   async getTypeAttributeList(req, res) {
     try {
-      let { typeId } = req.query;
-      let attributeData = [];
-      const attributeList: any = await attributeService.getAttributeType(typeId);
-      for (let value of attributeList) {
-        let obj: Object = {
+      const { typeId } = req.query;
+      const attributeData = [];
+      const attributeList: any = await attributeService.getAttributeType(
+        typeId
+      );
+      for (const value of attributeList) {
+        const obj: Record<string, any> = {
           _id: value._id,
           enter: value.enter,
           key: value.key,
@@ -123,23 +150,25 @@ export default {
           status: value.status,
           news: value.news,
           attribute: null,
-          attributeValueId: null
+          attributeValueId: null,
         };
         const attribute_id = value._id;
-        const attributeValueList: any = await attributeService.getAttributeValue(attribute_id);
-        let arr = [];
-        let idArr = [];
-        attributeValueList.forEach(index => {
+        const attributeValueList: any = await attributeService.getAttributeValue(
+          attribute_id
+        );
+        const arr = [];
+        const idArr = [];
+        attributeValueList.forEach((index) => {
           arr.push(index.attribute_value);
           idArr.push(index._id);
         });
-        obj['attribute'] = arr;
-        obj['attributeValueId'] = idArr;
+        obj.attribute = arr;
+        obj.attributeValueId = idArr;
         attributeData.push(obj);
       }
       res.status(200).send({
         code: 0,
-        data: attributeData
+        data: attributeData,
       });
     } catch (err) {
       console.log(err);
@@ -149,24 +178,26 @@ export default {
   //删除某个属性
   async removeAttribute(req, res) {
     try {
-      let { _id, attributeValueId } = req.body;
+      const { _id, attributeValueId } = req.body;
       const result = attributeService.isAttribute(_id);
       if (result !== null) {
-        await Promise.all([attributeService.removeAttribute(_id), attributeService.removeAttributeValue(attributeValueId)]).then(() => {
+        await Promise.all([
+          attributeService.removeAttribute(_id),
+          attributeService.removeAttributeValue(attributeValueId),
+        ]).then(() => {
           res.status(200).send({
             code: 0,
-            message: '删除成功'
-          })
-        })
+            message: "删除成功",
+          });
+        });
       } else {
         res.status(200).send({
           code: 1,
           message: "属性不存在",
         });
       }
-
     } catch (err) {
       console.log(err);
     }
-  }
-}
+  },
+};

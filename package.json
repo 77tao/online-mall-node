@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev ./bin/www.ts",
-    "eslint": "eslint src --ext .ts",
+    "eslint": "eslint --fix --ext .ts src/ ",
     "test": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
@@ -37,6 +37,8 @@
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
     "supertest": "^4.0.2",
